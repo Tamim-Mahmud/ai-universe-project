@@ -41,7 +41,7 @@ function showData(data, showMore = false) {
         <h2 class="text-2xl font-bold mt-5">${data[i].name}</h2>
         <div class="flex justify-between items-center">
             <h2 class="mt-2 "><span><i class="fa-regular fa-calendar-days"></i> date</span></h2>
-        <button onclick ="loadModalData('${data[i].id}')"id="" class="button bg-red-200 p-3 rounded-xl"><i class="fa-solid fa-arrow-right"></i></button>
+        <button onclick ="modalOpen('${data[i].id}')" onclick="my_modal_4.showModal() id="" class="button bg-red-200 p-3 rounded-xl"><i class="fa-solid fa-arrow-right"></i></button>
         </div>
         </div>
     </div>
@@ -51,11 +51,15 @@ function showData(data, showMore = false) {
     document.getElementById('spinner').classList.add('hidden');
 }
 
-
-const loadModalData =(id) =>{
-      fetch(`https://openapi.programming-hero.com/api/ai/tool/${id}`)
+const modalOpen=(id)=>{
+    document.getElementById('my_modal_4').showModal();
+    fetch(`https://openapi.programming-hero.com/api/ai/tool/${id}`)
         .then(res => res.json())
-        .then(json =>console.log(json.data))
+        .then(json =>showModalData(json.data))
+}
+
+const showModalData = (data) =>{
+    console.log(data);
 }
 document.getElementById('showMoreBtn').addEventListener('click', () => {
     const data = loadData();
